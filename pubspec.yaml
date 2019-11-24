@@ -26,7 +26,6 @@ dependencies:
   rxdart:
   http:
   flutter_facebook_login: ^1.1.1
-  google_sign_in:
 
 dev_dependencies:
   flutter_test:

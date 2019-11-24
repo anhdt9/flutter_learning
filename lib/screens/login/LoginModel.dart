@@ -21,12 +21,12 @@ class LoginModel {
   Sink<String> get emailSink => _emailSubject.sink;
 
   Stream<String> get emailStream =>
-      _emailSubject.stream.transform(emailValidation);
+      _emailSubject.stream.transform(emailValidation).skip(1);
 
   Sink<String> get passwordSink => _passwordSubject.sink;
 
   Stream<String> get passwordStream =>
-      _passwordSubject.stream.transform(passValidation);
+      _passwordSubject.stream.transform(passValidation).skip(1);
 
   Sink<bool> get btnSink => _btnSubject.sink;
 

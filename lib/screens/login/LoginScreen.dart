@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 import '../../navigator/NavigatorController.dart';
@@ -35,10 +34,8 @@ class _LoginBodyState extends State<LoginBody> {
   final loginViewModel = LoginModel();
 
   bool isFacebookLoggedIn = false;
-  bool isGoogleLoggedIn = false;
 
   var facebookProfileData;
-  var googleProfileData;
   var _facebookLogin = FacebookLogin();
 
   void onLoginStatusChanged(bool isLoggedIn, {profileData}) {
@@ -48,6 +45,7 @@ class _LoginBodyState extends State<LoginBody> {
       if (isLoggedIn) {
         print(
             "Fb login data : ${profileData['picture']['data']['url']}\n${profileData['id']}\n${profileData['name']}\n${profileData['email']}");
+        NavigatorController.push(context, HomeScreen());
       }
     });
   }
@@ -79,29 +77,6 @@ class _LoginBodyState extends State<LoginBody> {
     await _facebookLogin.logOut();
     onLoginStatusChanged(false);
     print("_logoutFacebook");
-  }
-
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
-
-  _loginGoogle() async {
-    try {
-      await _googleSignIn.signIn();
-      isGoogleLoggedIn = true;
-      print("_loginGoogle" +
-          _googleSignIn.currentUser.email +
-          ", " +
-          _googleSignIn.currentUser.displayName +
-          ", " +
-          _googleSignIn.currentUser.photoUrl);
-    } catch (err) {
-      print(err);
-    }
-  }
-
-  _logoutGoogle() async {
-    await _googleSignIn.signOut();
-    isGoogleLoggedIn = false;
-    print("_logoutGoogle");
   }
 
   @override
@@ -136,7 +111,7 @@ class _LoginBodyState extends State<LoginBody> {
                 return TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    hintText: "Nhap email ...",
+                    hintText: "abc@gmail.com",
                     labelText: "Email",
                     icon: Icon(Icons.email),
                     errorText: snapshot.data,
@@ -153,7 +128,7 @@ class _LoginBodyState extends State<LoginBody> {
                   controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: "Nhap mat khau ...",
+                    hintText: "123456",
                     labelText: "Mat khau",
                     icon: Icon(Icons.lock),
                     errorText: snapshot.data,
@@ -164,7 +139,7 @@ class _LoginBodyState extends State<LoginBody> {
             height: 30,
           ),
           SizedBox(
-            width: 200,
+            width: 150,
             height: 40,
             child: StreamBuilder<bool>(
                 stream: loginViewModel.btnStream,
@@ -183,40 +158,20 @@ class _LoginBodyState extends State<LoginBody> {
                   );
                 }),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: 200,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text("Login with Facebook"),
-                  onPressed: () => _loginFacebook(),
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                ),
+          SizedBox(
+            width: 150,
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              SizedBox(
-                width: 10,
+              child: Text(
+                "Login with Facebook",
+                style: TextStyle(fontSize: 11),
               ),
-              SizedBox(
-                width: 200,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text("Login with Google"),
-                  onPressed: () => _loginGoogle(),
-                  color: Colors.red,
-                  textColor: Colors.white,
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-            ],
+              onPressed: () => _loginFacebook(),
+              color: Colors.blue,
+              textColor: Colors.white,
+            ),
           ),
           SizedBox(
             width: 200,
@@ -226,11 +181,6 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               child: Text("Logout"),
               onPressed: () {
-
-                _googleSignIn.isSignedIn().then((result) => {
-                  result ? _logoutGoogle() : {}
-                }).catchError((err) => {print(err.toString())});
-
                 _facebookLogin.isLoggedIn
                     .then((result) => {result ? _logoutFacebook() : {}})
                     .catchError((err) => {print(err.toString())});
