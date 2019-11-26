@@ -1,6 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_learning/base/BaseScreen.dart';
+import 'package:flutter_app_learning/data/User.dart';
+import 'package:flutter_app_learning/helper/SharedPreferenceManager.dart';
+import 'package:flutter_app_learning/route/AppRoute.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +12,7 @@ import '../../navigator/NavigatorController.dart';
 import '../home/HomeScreen.dart';
 import 'LoginModel.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends BaseScreen {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +25,11 @@ class LoginScreen extends StatelessWidget {
       body: LoginBody(),
     );
   }
+
+  @override
+  getScreenName() {
+    return "LoginScreen";
+  }
 }
 
 class LoginBody extends StatefulWidget {
@@ -29,23 +38,42 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final loginViewModel = LoginModel();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _loginViewModel = LoginModel();
 
-  bool isFacebookLoggedIn = false;
+  bool _isFacebookLoggedIn = false;
 
-  var facebookProfileData;
+  var _facebookProfileData;
   var _facebookLogin = FacebookLogin();
 
   void onLoginStatusChanged(bool isLoggedIn, {profileData}) {
     setState(() {
-      this.isFacebookLoggedIn = isLoggedIn;
-      this.facebookProfileData = profileData;
+      this._isFacebookLoggedIn = isLoggedIn;
+      this._facebookProfileData = profileData;
       if (isLoggedIn) {
-        print(
-            "Fb login data : ${profileData['picture']['data']['url']}\n${profileData['id']}\n${profileData['name']}\n${profileData['email']}");
-        NavigatorController.push(context, HomeScreen());
+        String id = profileData['id'];
+        String name = profileData['name'];
+        String email = profileData['email'];
+        String url = profileData['picture']['data']['url'];
+
+        SharedPreferenceManager.setString(SharedPreferenceManager.PREF_ID, id);
+        SharedPreferenceManager.setString(SharedPreferenceManager.PREF_NAME, name);
+        SharedPreferenceManager.setString(SharedPreferenceManager.PREF_EMAIL, email);
+        SharedPreferenceManager.setString(SharedPreferenceManager.PREF_URL, url);
+        SharedPreferenceManager.setBool(SharedPreferenceManager.PREF_LOGIN, true);
+
+        User user = new User.map(profileData);
+        print("onLoginStatusChanged, isLoggedIn = true, data = " + user.toString());
+        _loginViewModel.userSink.add(user);
+
+        Navigator.pushNamed(context, AppRoute.HOME_SCREEN, arguments:user);
+      } else {
+        SharedPreferenceManager.remove(SharedPreferenceManager.PREF_ID);
+        SharedPreferenceManager.remove(SharedPreferenceManager.PREF_NAME);
+        SharedPreferenceManager.remove(SharedPreferenceManager.PREF_EMAIL);
+        SharedPreferenceManager.remove(SharedPreferenceManager.PREF_URL);
+        SharedPreferenceManager.remove(SharedPreferenceManager.PREF_LOGIN);
       }
     });
   }
@@ -66,8 +94,6 @@ class _LoginBodyState extends State<LoginBody> {
             'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.width(400)&access_token=${facebookLoginResult.accessToken.token}');
 
         var profile = json.decode(graphResponse.body);
-        print(profile.toString());
-
         onLoginStatusChanged(true, profileData: profile);
         break;
     }
@@ -82,19 +108,19 @@ class _LoginBodyState extends State<LoginBody> {
   @override
   void initState() {
     super.initState();
-    emailController.addListener(() {
-      loginViewModel.emailSink.add(emailController.text);
+    _emailController.addListener(() {
+      _loginViewModel.emailSink.add(_emailController.text);
     });
 
-    passwordController.addListener(() {
-      loginViewModel.passwordSink.add(passwordController.text);
+    _passwordController.addListener(() {
+      _loginViewModel.passwordSink.add(_passwordController.text);
     });
   }
 
   @override
   void dispose() {
     super.dispose();
-    loginViewModel.dispose();
+    _loginViewModel.dispose();
     print("loginViewModel.dispose");
   }
 
@@ -106,10 +132,10 @@ class _LoginBodyState extends State<LoginBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           StreamBuilder<String>(
-              stream: loginViewModel.emailStream,
+              stream: _loginViewModel.emailStream,
               builder: (context, snapshot) {
                 return TextFormField(
-                  controller: emailController,
+                  controller: _emailController,
                   decoration: InputDecoration(
                     hintText: "abc@gmail.com",
                     labelText: "Email",
@@ -122,10 +148,10 @@ class _LoginBodyState extends State<LoginBody> {
             height: 10,
           ),
           StreamBuilder<String>(
-              stream: loginViewModel.passwordStream,
+              stream: _loginViewModel.passwordStream,
               builder: (context, snapshot) {
                 return TextFormField(
-                  controller: passwordController,
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "123456",
@@ -142,7 +168,7 @@ class _LoginBodyState extends State<LoginBody> {
             width: 150,
             height: 40,
             child: StreamBuilder<bool>(
-                stream: loginViewModel.btnStream,
+                stream: _loginViewModel.btnStream,
                 builder: (context, snapshot) {
                   return RaisedButton(
                     shape: RoundedRectangleBorder(

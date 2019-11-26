@@ -26,6 +26,7 @@ dependencies:
   rxdart:
   http:
   flutter_facebook_login: ^1.1.1
+  shared_preferences: ^0.5.4+6
 
 dev_dependencies:
   flutter_test:
