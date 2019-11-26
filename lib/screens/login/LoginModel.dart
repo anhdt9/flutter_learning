@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_app_learning/data/User.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_app_learning/helper/Validation.dart';
 
@@ -7,6 +8,7 @@ class LoginModel {
   final _emailSubject = BehaviorSubject<String>();
   final _passwordSubject = BehaviorSubject<String>();
   final _btnSubject = BehaviorSubject<bool>();
+  final _uerSubject = BehaviorSubject<User>();
 
   var emailValidation =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
@@ -32,6 +34,11 @@ class LoginModel {
 
   Stream<bool> get btnStream => _btnSubject.stream;
 
+  Sink<User> get userSink => _uerSubject.sink;
+
+  Stream<User> get userStream => _uerSubject.stream;
+
+
   // email, password is Event dispatch from _emailSubject, _passwordSubject
   LoginModel() {
     Observable.combineLatest2(_emailSubject, _passwordSubject,
@@ -47,5 +54,6 @@ class LoginModel {
     _emailSubject.close();
     _passwordSubject.close();
     _btnSubject.close();
+    _uerSubject.close();
   }
 }
