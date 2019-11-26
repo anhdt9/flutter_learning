@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_learning/base/BaseAppBar.dart';
-import 'package:flutter_app_learning/navigator/NavigatorController.dart';
-
+import 'package:flutter_app_learning/base/BaseScreen.dart';
+import 'package:flutter_app_learning/data/User.dart';
 import 'package:flutter_app_learning/screens/home/Home_Body.dart';
 import 'package:flutter_app_learning/screens/home/Home_Drawer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends BaseScreen {
+
   @override
   Widget build(BuildContext context) {
+
+    // for test -> OK
+    User user = ModalRoute.of(context).settings.arguments;
+//    print("HomeScreen, get route arguments : " + user.toString());
+
     return Scaffold(
       appBar: BaseAppBar(
         title: Text("Title"),
@@ -27,7 +33,7 @@ class HomeScreen extends StatelessWidget {
             color: Colors.black,
           ),
           tooltip: "Back",
-          onPressed: () => {NavigatorController.pop(context)}),
+          onPressed: () => {Navigator.pop(context)}),
       IconButton(
           icon: Icon(
             Icons.ac_unit,
@@ -52,5 +58,10 @@ class HomeScreen extends StatelessWidget {
         onSelected: (index) => {print(index.toString())},
       )
     ];
+  }
+
+  @override
+  getScreenName() {
+    return "HomeScreen";
   }
 }
