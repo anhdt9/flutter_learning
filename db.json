@@ -1,0 +1,19 @@
+{
+  "users": [
+    { "id": 1, "name": "The Anh 1", "username" : "Dang The Anh 1" },
+    { "id": 2, "name": "The Anh 2", "username" : "Dang The Anh 2" },
+    { "id": 3, "name": "The Anh 3", "username" : "Dang The Anh 3" }
+  ],
+  "posts": [
+    { "userId": 1, "id": 1, "title": "Post 1", "body": "Body 1" },
+    { "userId": 2, "id": 2, "title": "Post 2", "body": "Body 2" },
+    { "userId": 3, "id": 3, "title": "Post 3", "body": "Body 333" }
+  ],
+  "comments": [
+    { "postId": 1, "id": 1, "name": "The Anh 1", "email": "theanh1@gmail.com", "body": "some comment1"},
+    { "postId": 2, "id": 2, "name": "The Anh 2", "email": "theanh2@gmail.com", "body": "some comment2"}
+  ],
+  "profile": {
+    "name": "profile"
+  }
+}
