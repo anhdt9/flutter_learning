@@ -13,10 +13,10 @@ class AppRoute {
       };
 
   static String getInitRoute(BuildContext context) {
-    bool result = false;
-    SharedPreferenceManager.getBool(SharedPreferenceManager.PREF_LOGIN).then((
-        value) => {result = value});
-    if (result) {
+    String id;
+    SharedPreferenceManager.getString(SharedPreferenceManager.PREF_ID).then((
+        value) => {id = value});
+    if (id != null) {
       return HOME_SCREEN;
     } else {
       return LOGIN_SCREEN;

@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app_learning/data/User.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_app_learning/helper/Validation.dart';
 
-class LoginModel {
+class LoginBloc extends ChangeNotifier{
   final _emailSubject = BehaviorSubject<String>();
   final _passwordSubject = BehaviorSubject<String>();
   final _btnSubject = BehaviorSubject<bool>();
@@ -40,7 +42,7 @@ class LoginModel {
 
 
   // email, password is Event dispatch from _emailSubject, _passwordSubject
-  LoginModel() {
+  LoginBloc() {
     Observable.combineLatest2(_emailSubject, _passwordSubject,
         (email, password) {
       return Validation.validateEmail(email) == null &&
@@ -51,9 +53,14 @@ class LoginModel {
   }
 
   dispose() {
+    super.dispose();
     _emailSubject.close();
     _passwordSubject.close();
     _btnSubject.close();
     _uerSubject.close();
+  }
+
+  static LoginBloc of(BuildContext context) {
+    return Provider.of<LoginBloc>(context);
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter_app_learning/screens/login/LoginModel.dart';
 class MyDrawer extends Container {
   @override
   Widget build(BuildContext context) {
-    final _loginViewModel = LoginModel();
+    final _loginViewModel = LoginBloc();
 
     return Drawer(
       child: StreamBuilder<User>(
