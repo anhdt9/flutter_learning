@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/data/User.dart';
-import 'package:flutter_app_learning/screens/login/LoginModel.dart';
+import 'package:flutter_app_learning/STRUCTURE/core/model/User.dart';
 
-class MyDrawer extends Container {
+class HomeViewDrawer extends Container {
   @override
   Widget build(BuildContext context) {
-    final _loginViewModel = LoginBloc();
 
     return Drawer(
       child: StreamBuilder<User>(
-        stream: _loginViewModel.userStream,
+//        stream: _loginViewModel.userStream,
         builder: (context, snapshot) {
 
           User user = snapshot.data;

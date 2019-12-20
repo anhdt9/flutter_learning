@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/base/BaseAppBar.dart';
-import 'package:flutter_app_learning/base/BaseScreen.dart';
-import 'package:flutter_app_learning/data/User.dart';
-import 'package:flutter_app_learning/screens/home/Home_Body.dart';
-import 'package:flutter_app_learning/screens/home/Home_Drawer.dart';
+import 'package:flutter_app_learning/STRUCTURE/core/model/User.dart';
+import 'package:flutter_app_learning/STRUCTURE/ui/view/home_view_body.dart';
+import 'package:flutter_app_learning/STRUCTURE/ui/view/home_view_drawer.dart';
+import 'package:flutter_app_learning/STRUCTURE/ui/BaseAppBar.dart';
 
-class HomeScreen extends BaseScreen {
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
 
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
 
@@ -20,8 +23,8 @@ class HomeScreen extends BaseScreen {
         appBar: AppBar(),
         actions: homeActions(context),
       ),
-      drawer: MyDrawer(),
-      body: MyBody(),
+      drawer: HomeViewDrawer(),
+      body: HomeViewBody(),
     );
   }
 
@@ -59,9 +62,5 @@ class HomeScreen extends BaseScreen {
       )
     ];
   }
-
-  @override
-  getScreenName() {
-    return "HomeScreen";
-  }
 }
+

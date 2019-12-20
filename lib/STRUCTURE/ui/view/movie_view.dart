@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class MovieScreen extends StatelessWidget {
+class MovieView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("Baby Name Votes"),
+          title: Text("Baby Name Votes MovieView"),
           centerTitle: true,),
         body: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance.collection("baby").snapshots(),

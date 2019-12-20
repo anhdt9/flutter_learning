@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_learning/STRUCTURE/ui/view/favorite_view.dart';
+import 'package:flutter_app_learning/STRUCTURE/ui/view/movie_view.dart';
+import 'package:flutter_app_learning/STRUCTURE/ui/view/tvshow_view.dart';
 
-import 'package:flutter_app_learning/screens/home/MovieScreen.dart';
-import 'package:flutter_app_learning/screens/home/TvShowScreen.dart';
-
-class FavouriteScreen extends StatelessWidget {
+class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: new Scaffold(
-          backgroundColor: Colors.brown,
-          appBar: TabBar(
+          backgroundColor: Colors.black,
+          bottomNavigationBar: TabBar(
             tabs: [
               Tab(
                 icon: new Icon(Icons.movie),
               ),
               Tab(
                 icon: new Icon(Icons.tv),
+              ),
+              Tab(
+                icon: new Icon(Icons.favorite),
               ),
             ],
             labelColor: Colors.yellow,
@@ -25,9 +28,11 @@ class FavouriteScreen extends StatelessWidget {
             indicatorColor: Colors.red,
           ),
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: [
-              MovieScreen(),
-              TvShowScreen(),
+              MovieView(),
+              TvShowView(),
+              FavouriteView(),
             ],
           ),
         ));
