@@ -1,8 +1,6 @@
-import 'dart:async';
-
-import 'package:flutter_app_learning/STRUCTURE/core/model/User.dart';
-import 'package:flutter_app_learning/STRUCTURE/core/service/API.dart';
-import 'package:flutter_app_learning/STRUCTURE/core/service/AuthenticationService.dart';
+import 'package:flutter_app_learning/core/model/User.dart';
+import 'package:flutter_app_learning/core/service/API.dart';
+import 'package:flutter_app_learning/core/viewmodel/view/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 List<SingleChildCloneableWidget> appProviders = [
@@ -16,14 +14,12 @@ List<SingleChildCloneableWidget> independentServices = [
 ];
 
 List<SingleChildCloneableWidget> dependentServices = [
-  ProxyProvider<Api, AuthenticationService>(
-    update: (context, api, authenticationService) =>
-        AuthenticationService(api: api),
+  ProxyProvider<Api, LoginViewModel>(
+    update: (context, api, loginModel) => LoginViewModel(api: api),
   )
 ];
 List<SingleChildCloneableWidget> uiConsumableProviders = [
   StreamProvider<User>(
-    create: (context) =>
-        Provider.of<AuthenticationService>(context, listen: false).user,
+    create: (context) => Provider.of<LoginViewModel>(context, listen: false).user,
   )
 ];

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_learning/provider_setup.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/route/local_route.dart';
+import 'package:flutter_app_learning/ui/route/local_route.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  Provider.debugCheckInvalidValueType = null;
   runApp(MyApp());
 }
 

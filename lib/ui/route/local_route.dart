@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/navigator.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/home_view.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/login_view.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/movie_view.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/tvshow_view.dart';
+import 'package:flutter_app_learning/ui/view/home_view.dart';
+import 'package:flutter_app_learning/ui/view/login_view.dart';
+import 'package:flutter_app_learning/ui/view/movie_view.dart';
+import 'package:flutter_app_learning/ui/view/tvshow_view.dart';
 
 class LocalRouter {
   static const LOGIN = "login";

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/STRUCTURE/core/model/User.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/home_view_body.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/home_view_drawer.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/BaseAppBar.dart';
+import 'package:flutter_app_learning/ui/BaseAppBar.dart';
+import 'package:flutter_app_learning/ui/route/local_route.dart';
+import 'package:flutter_app_learning/ui/view/home_view_body.dart';
+import 'package:flutter_app_learning/ui/view/home_view_drawer.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -12,10 +12,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-
-    // for test -> OK
-    User user = ModalRoute.of(context).settings.arguments;
-//    print("HomeScreen, get route arguments : " + user.toString());
 
     return Scaffold(
       appBar: BaseAppBar(
@@ -36,7 +32,8 @@ class _HomeViewState extends State<HomeView> {
             color: Colors.black,
           ),
           tooltip: "Back",
-          onPressed: () => {Navigator.pop(context)}),
+          onPressed: () => {
+            Navigator.pushNamed(context, LocalRouter.LOGIN)}),
       IconButton(
           icon: Icon(
             Icons.ac_unit,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/movie_view.dart';
-import 'package:flutter_app_learning/STRUCTURE/ui/view/tvshow_view.dart';
+import 'package:flutter_app_learning/ui/view/movie_view.dart';
+import 'package:flutter_app_learning/ui/view/tvshow_view.dart';
 
 class FavouriteView extends StatelessWidget {
   @override
