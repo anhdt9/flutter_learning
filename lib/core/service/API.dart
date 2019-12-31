@@ -20,8 +20,7 @@ class Api {
   }
 
   Future<User> _loginFb() async {
-    var facebookLoginResult =
-        await _fbLogin.logInWithReadPermissions(['email']);
+    var facebookLoginResult = await _fbLogin.logIn(['email']);
     print("facebookLoginResult = ${facebookLoginResult.status}");
 
     if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {

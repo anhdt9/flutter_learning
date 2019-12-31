@@ -2,8 +2,9 @@ import 'package:flutter_app_learning/core/model/User.dart';
 import 'package:flutter_app_learning/core/service/API.dart';
 import 'package:flutter_app_learning/core/viewmodel/view/login_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
-List<SingleChildCloneableWidget> appProviders = [
+List<SingleChildWidget> appProviders = [
   ...independentServices,
   ...dependentServices,
   ...uiConsumableProviders,

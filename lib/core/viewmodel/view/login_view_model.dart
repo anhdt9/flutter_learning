@@ -24,7 +24,7 @@ class LoginViewModel extends BaseViewModel with Validations {
       _passwordController.stream.transform(validatePassword).skip(1);
 
   Stream<bool> get loginValid =>
-      Observable.combineLatest2(email, password, (e, p) => true);
+      Rx.combineLatest2(email, password, (e, p) => true);
 
   //change data
   Function(String) get changeEmail => _emailController.sink.add;
