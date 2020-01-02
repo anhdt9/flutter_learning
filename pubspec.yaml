@@ -33,6 +33,7 @@ dependencies:
   firebase_core:
   firebase_crashlytics:
   firebase_messaging:
+  firebase_database:
   connectivity:
   dio:
   flutter_facebook_login:
@@ -49,6 +50,30 @@ dependencies:
   sqflite:
   url_launcher:
   video_player:
+  cached_network_image:
+  flutter_bloc:
+  firebase_storage:
+  geolocator:
+  flutter_webview_plugin:
+  font_awesome_flutter:
+  fluttertoast:
+  image_cropper:
+  file_picker:
+  flutter_secure_storage:
+
+  datetime_picker_formfield:
+  audioplayers:
+  json_serializable:
+  built_value_generator:
+  mobx_codegen:
+  image:
+  bloc:
+  email_validator:
+  pdf:
+  socket_io:
+  fl_chart:
+  pie_chart:
+  mp_chart:
 
 dev_dependencies:
   flutter_test:
