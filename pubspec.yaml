@@ -25,55 +25,30 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   android_intent:
-    path: ../flutter_package/android_intent-0.3.4+8
   cloud_firestore:
-    path: ../flutter_package/cloud_firestore-0.13.0+1
-#  google_maps_flutter:
-#    path: ../flutter_package/google_maps_flutter-0.5.21+15
-#  google_sign_in:
-#      path: ../flutter_package/google_sign_in-4.1.1
-#  firebase_analytics:
-#    path: ../flutter_package/firebase_analytics-5.0.9
-#  firebase_auth:
-#    path: ../flutter_package/firebase_auth-0.15.3
-#  firebase_core:
-#    path: ../flutter_package/firebase_core-0.4.3+1
-#  firebase_crashlytics:
-#    path: ../flutter_package/firebase_crashlytics-0.1.2+4
-#  firebase_messaging:
-#    path: ../flutter_package/firebase_messaging-6.0.9
+  google_maps_flutter:
+  google_sign_in:
+  firebase_analytics:
+  firebase_auth:
+  firebase_core:
+  firebase_crashlytics:
+  firebase_messaging:
   connectivity:
-    path: ../flutter_package/connectivity-0.4.6+1
   dio:
-    path: ../flutter_package/dio-3.0.8
   flutter_facebook_login:
-    path: ../flutter_package/flutter_facebook_login-3.0.0
   flutter_local_notifications:
-    path: ../flutter_package/flutter_local_notifications-0.9.1
   get_it:
-    path: ../flutter_package/get_it-3.1.0
   http:
-    path: ../flutter_package/http-0.12.0+3
   image_picker:
-    path: ../flutter_package/image_picker-0.6.2+3
   path_provider:
-    path: ../flutter_package/path_provider-1.5.1
   permission_handler:
-    path: ../flutter_package/permission_handler-4.0.0
   provider:
-    path: ../flutter_package/provider-4.0.1
   rxdart:
-    path: ../flutter_package/rxdart-0.23.1
   share:
-    path: ../flutter_package/share-0.6.3+5
   shared_preferences:
-    path: ../flutter_package/shared_preferences-0.5.6
   sqflite:
-    path: ../flutter_package/sqflite-1.2.0
   url_launcher:
-    path: ../flutter_package/url_launcher-5.4.1
   video_player:
-    path: ../flutter_package/video_player-0.10.5
 
 dev_dependencies:
   flutter_test:
