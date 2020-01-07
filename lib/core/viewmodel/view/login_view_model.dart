@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/core/model/User.dart';
-import 'package:flutter_app_learning/core/service/API.dart';
-import 'package:flutter_app_learning/core/util/Validations.dart';
+import 'package:flutter_app_learning/core/model/user.dart';
+import 'package:flutter_app_learning/core/service/api.dart';
+import 'package:flutter_app_learning/core/util/validations.dart';
 import 'package:flutter_app_learning/core/viewmodel/base_view_model.dart';
 import 'package:rxdart/rxdart.dart';
 

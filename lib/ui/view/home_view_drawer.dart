@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/core/model/User.dart';
+import 'package:flutter_app_learning/core/model/user.dart';
 import 'package:provider/provider.dart';
 
 class HomeViewDrawer extends Container {

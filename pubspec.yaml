@@ -30,6 +30,7 @@ dependencies:
   shared_preferences:
   http:
   cloud_firestore:
+  local_auth:
 
 #  android_intent:
 #  google_maps_flutter:
