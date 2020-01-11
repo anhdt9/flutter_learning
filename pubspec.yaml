@@ -124,6 +124,18 @@ dependencies:
   video_player:
   xml:
   xml2json:
+  dartz:
+  data_connection_checker:
+  android_alarm_manager:
+  camera:
+  package_info:
+  quick_actions:
+  webview_flutter:
+  string_scanner:
+  intl_translation:
+  isolate:
+  flutter_search_bar:
+
 
 dev_dependencies:
   flutter_test:
