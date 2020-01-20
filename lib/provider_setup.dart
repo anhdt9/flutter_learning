@@ -1,8 +1,9 @@
-import 'package:flutter_app_learning/core/model/user.dart';
-import 'package:flutter_app_learning/core/service/api.dart';
-import 'package:flutter_app_learning/core/viewmodel/view/login_view_model.dart';
+import 'package:flutter_app_learning/services/api.dart';
+import 'package:flutter_app_learning/viewmodels/LoginViewModel.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
+
+import 'models/user.dart';
 
 List<SingleChildWidget> appProviders = [
   ...independentServices,
@@ -10,7 +11,9 @@ List<SingleChildWidget> appProviders = [
   ...uiConsumableProviders,
 ];
 
-List<SingleChildWidget> independentServices = [Provider.value(value: Api.get())];
+List<SingleChildWidget> independentServices = [
+  Provider.value(value: Api.get())
+];
 
 List<SingleChildWidget> dependentServices = [
   ProxyProvider<Api, LoginViewModel>(

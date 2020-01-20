@@ -25,5 +25,4 @@ class User {
   String toString() {
     return 'User{_id: $_id, _name: $_name, _email: $_email, _url: $_url}';
   }
-
 }

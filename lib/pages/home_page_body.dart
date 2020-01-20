@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/ui/view/favorite_view.dart';
-import 'package:flutter_app_learning/ui/view/movie_view.dart';
-import 'package:flutter_app_learning/ui/view/tvshow_view.dart';
+import 'package:flutter_app_learning/pages/favorite_page.dart';
+import 'package:flutter_app_learning/pages/movie_page.dart';
+import 'package:flutter_app_learning/pages/tvshow_page.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -30,9 +30,9 @@ class HomeViewBody extends StatelessWidget {
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: [
-              MovieView(),
-              TvShowView(),
-              FavouriteView(),
+              MoviePage(),
+              TvShowPage(),
+              FavouritePage(),
             ],
           ),
         ));

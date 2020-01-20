@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/ui/view/movie_view.dart';
-import 'package:flutter_app_learning/ui/view/tvshow_view.dart';
+import 'package:flutter_app_learning/pages/movie_page.dart';
+import 'package:flutter_app_learning/pages/tvshow_page.dart';
 
-class FavouriteView extends StatelessWidget {
+class FavouritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 2,
         child: new Scaffold(
-          backgroundColor: Colors.brown,
           appBar: TabBar(
             tabs: [
               Tab(
@@ -25,8 +24,8 @@ class FavouriteView extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              MovieView(),
-              TvShowView(),
+              MoviePage(),
+              TvShowPage(),
             ],
           ),
         ));

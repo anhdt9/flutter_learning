@@ -1,22 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class MovieView extends StatelessWidget {
+class MoviePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Baby Name Votes MovieView"),
-          centerTitle: true,),
         body: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance.collection("baby").snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) return LinearProgressIndicator();
               return _buildBody(context, snapshot.data.documents);
-            }
-        )
-    );
+            }));
   }
 
   Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -25,7 +19,6 @@ class MovieView extends StatelessWidget {
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
@@ -42,10 +35,10 @@ class MovieView extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(record.name),
-          trailing: Text(record.votes.toString()),
-          onTap: () => record.reference.updateData({'votes': FieldValue.increment(1)})
-        ),
+            title: Text(record.name),
+            trailing: Text(record.votes.toString()),
+            onTap: () => record.reference
+                .updateData({'votes': FieldValue.increment(1)})),
       ),
     );
   }
@@ -56,7 +49,9 @@ class Record {
   final int votes;
   final DocumentReference reference;
 
-  Record.fromMap(Map<String, dynamic> map, {this.reference}) : assert(map['name'] != null), assert(map['votes'] != null),
+  Record.fromMap(Map<String, dynamic> map, {this.reference})
+      : assert(map['name'] != null),
+        assert(map['votes'] != null),
         name = map['name'],
         votes = map['votes'];
 

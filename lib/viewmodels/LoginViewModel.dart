@@ -1,17 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/core/model/user.dart';
-import 'package:flutter_app_learning/core/service/api.dart';
-import 'package:flutter_app_learning/core/util/validations.dart';
-import 'package:flutter_app_learning/core/viewmodel/base_view_model.dart';
+import 'package:flutter_app_learning/models/user.dart';
+import 'package:flutter_app_learning/services/api.dart';
+import 'package:flutter_app_learning/utils/validations.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginViewModel extends BaseViewModel with Validations {
+class LoginViewModel extends ChangeNotifier with Validations {
   Api _api;
 
-  LoginViewModel({@required Api api
-  }) : _api = api;
+  LoginViewModel({@required Api api}) : _api = api;
 
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
@@ -28,20 +26,23 @@ class LoginViewModel extends BaseViewModel with Validations {
 
   //change data
   Function(String) get changeEmail => _emailController.sink.add;
+
   Function(String) get changePassword => _passwordController.sink.add;
 
   final StreamController<User> _userController = StreamController<User>();
+
   Stream<User> get user => _userController.stream;
 
   Future<bool> login(String type) async {
-    busy = true;
     var hasUser;
-    await _api.login(type, email: _emailController.value, password: _passwordController.value).then((value) {
+    await _api
+        .login(type,
+            email: _emailController.value, password: _passwordController.value)
+        .then((value) {
       hasUser = value;
     });
     _userController.add(hasUser);
     print("_userController.add user : ${hasUser.toString()}");
-    busy = false;
     return hasUser != null;
   }
 

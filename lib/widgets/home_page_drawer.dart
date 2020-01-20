@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/core/model/user.dart';
+import 'package:flutter_app_learning/models/user.dart';
 import 'package:provider/provider.dart';
 
-class HomeViewDrawer extends Container {
+class HomePageDrawer extends Container {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -17,10 +17,9 @@ class HomeViewDrawer extends Container {
                   textAlign: TextAlign.center,
                   textScaleFactor: 2.0,
                 ),
-                Image.network(
-                  Provider.of<User>(context).url,
-                  width: 60,
-                  height: 60,
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(Provider.of<User>(context).url),
                 ),
               ],
             ),

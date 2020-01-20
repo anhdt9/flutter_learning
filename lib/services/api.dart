@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_app_learning/core/model/user.dart';
+import 'package:flutter_app_learning/models/user.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,12 +8,11 @@ class Api {
   static const URL = 'https://api.themoviedb.org/';
   static const API_KEY = 'dbdd75aefbbd8a17489c25ec0fc8c9ef';
 
-
   static final Api _singleton = Api._internal();
 
   Api._internal();
 
-  static Api get()=> _singleton;
+  static Api get() => _singleton;
 
   var _fbLogin = FacebookLogin();
 

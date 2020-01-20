@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_learning/TEST/pages/Login2.dart';
+import 'package:flutter_app_learning/local_route.dart';
 import 'package:flutter_app_learning/provider_setup.dart';
-import 'package:flutter_app_learning/ui/route/local_route.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   Provider.debugCheckInvalidValueType = null;
-  runApp(LoginPage2());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TvShowView extends StatelessWidget {
+class TvShowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
