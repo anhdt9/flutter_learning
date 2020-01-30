@@ -6,8 +6,7 @@ class Validations {
 //    var isValid =
 //        RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
 
-    var isValid =
-    RegExp(r"^[a-zA-Z0-9.]").hasMatch(email);
+    var isValid = RegExp(r"^[a-zA-Z0-9.]").hasMatch(email);
     if (isValid) {
       sink.add(email);
     } else {

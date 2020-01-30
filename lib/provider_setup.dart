@@ -1,7 +1,7 @@
 import 'package:flutter_app_learning/services/api.dart';
 import 'package:flutter_app_learning/viewmodels/LoginViewModel.dart';
-import 'package:provider/single_child_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 import 'models/user.dart';
 

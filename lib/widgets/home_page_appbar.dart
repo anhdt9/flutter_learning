@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
-class HomeAppBar extends StatelessWidget implements PreferredSize {
+class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double smallSpace = 10;
-  final red500 = Colors.red[500];
+
+  @override
+  _HomeAppBarState createState() => _HomeAppBarState();
+
+  @override
+  Size get preferredSize =>
+      Size.fromHeight(AppBar().preferredSize.height + 2 * smallSpace);
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  final double smallSpace = 10;
+  final blue = Colors.blue;
+  var _searchModeController = BehaviorSubject<bool>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +29,39 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
           right: 20.0,
           child: AppBar(
             backgroundColor: Colors.white,
-            leading: Icon(
-              Icons.menu,
-              color: red500,
-            ),
+            leading: StreamBuilder<bool>(
+                stream: _searchModeController.stream.asBroadcastStream(),
+                builder: (context, snapshot) {
+                  return IconButton(
+                    icon: Icon((snapshot.data == true)
+                        ? Icons.arrow_back
+                        : Icons.menu),
+                    color: blue,
+                    onPressed: () {
+                      if (snapshot.data == false) {
+                        Scaffold.of(context).openDrawer();
+                      } else {
+                        _searchModeController.add(false);
+                        FocusScope.of(context).unfocus();
+                      }
+                    },
+                  );
+                }),
             primary: false,
             title: TextField(
+                onTap: () {
+                  _searchModeController.add(true);
+                },
                 decoration: InputDecoration(
-                    hintText: "Search",
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(color: Colors.grey))),
+                  hintText: "Search here...",
+                  border: InputBorder.none,
+                )),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.search, color: red500),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.notifications, color: red500),
-                onPressed: () {},
+                icon: Icon(Icons.notifications, color: blue),
+                onPressed: () {
+                  print("action notifications");
+                },
               )
             ],
           ),
@@ -44,10 +72,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
   }
 
   @override
-  // TODO: implement child
-  Widget get child => null;
-
-  @override
-  Size get preferredSize =>
-      Size.fromHeight(AppBar().preferredSize.height + 2 * smallSpace);
+  void dispose() {
+    _searchModeController.close();
+    super.dispose();
+  }
 }

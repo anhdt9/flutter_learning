@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_learning/constants.dart';
 import 'package:flutter_app_learning/local_route.dart';
 import 'package:flutter_app_learning/services/api.dart';
 import 'package:flutter_app_learning/viewmodels/LoginViewModel.dart';
@@ -54,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 _emailWidget(loginViewModel),
                 _passwordWidget(loginViewModel),
+                _rememberWidget(loginViewModel),
                 _loginBtnWidget(loginViewModel),
                 _newUserForgotPasswordWidget(loginViewModel),
                 _dividerWidget(),
@@ -107,6 +109,24 @@ class _LoginPageState extends State<LoginPage> {
         });
   }
 
+  Widget _rememberWidget(LoginViewModel loginViewModel) {
+    return StreamBuilder<bool>(
+        stream: loginViewModel.checked.asBroadcastStream(),
+        builder: (context, snapshot) {
+          return CheckboxListTile(
+            title: Text(
+              "Remember Me",
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+            controlAffinity: ListTileControlAffinity.leading,
+            onChanged: loginViewModel.changeChecked,
+            value: snapshot.data ?? false,
+          );
+        });
+  }
+
   Widget _loginBtnWidget(LoginViewModel loginViewModel) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -114,20 +134,28 @@ class _LoginPageState extends State<LoginPage> {
         child: StreamBuilder<bool>(
             stream: loginViewModel.loginValid.asBroadcastStream(),
             builder: (context, snapshot) {
-              return MaterialButton(
-                onPressed: snapshot.data == true
-                    ? () async {
-                        var loginSuccess = await loginViewModel.login("normal");
-                        if (loginSuccess) {
-                          Navigator.pushReplacementNamed(
-                              context, LocalRouter.HOME);
+              return SizedBox(
+                width: 200,
+                child: RaisedButton(
+                  onPressed: snapshot.data == true
+                      ? () async {
+                          var loginSuccess =
+                              await loginViewModel.login(LOGIN_TYPE.normal);
+                          if (loginSuccess) {
+                            Navigator.pushReplacementNamed(
+                                context, LocalRouter.HOME);
+                          }
                         }
-                      }
-                    : null,
-                color: Colors.blue,
-                minWidth: 200,
-                splashColor: Colors.red,
-                child: Text("LOGIN"),
+                      : null,
+                  color: Colors.blue,
+                  splashColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)),
+                  child: Text(
+                    "LOGIN",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
               );
             }),
       ),
@@ -197,7 +225,8 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           GestureDetector(
             onTap: () async {
-              var loginSuccess = await loginViewModel.login("facebook");
+              var loginSuccess =
+                  await loginViewModel.login(LOGIN_TYPE.facebook);
               if (loginSuccess) {
                 Navigator.pushReplacementNamed(context, LocalRouter.HOME);
               }

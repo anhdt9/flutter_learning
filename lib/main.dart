@@ -15,8 +15,6 @@ class MyApp extends StatelessWidget {
       providers: appProviders,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.deepPurple),
-        title: "FlutterLearningStructure",
         initialRoute: LocalRouter.LOGIN,
         onGenerateRoute: LocalRouter.generateRoute,
       ),

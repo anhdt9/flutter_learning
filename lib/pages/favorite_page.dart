@@ -9,18 +9,28 @@ class FavouritePage extends StatelessWidget {
         length: 2,
         child: new Scaffold(
           appBar: TabBar(
-            tabs: [
-              Tab(
-                icon: new Icon(Icons.movie),
-              ),
-              Tab(
-                icon: new Icon(Icons.tv),
-              ),
-            ],
-            labelColor: Colors.yellow,
-            unselectedLabelColor: Colors.blue,
+            labelColor: Colors.blue,
+            unselectedLabelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: Colors.red,
+            tabs: [
+              Container(
+                child: Tab(
+                    child: Text(
+                  "Movie",
+                  style: TextStyle(fontSize: 11),
+                )),
+                height: 30,
+              ),
+              Container(
+                child: Tab(
+                    child: Text(
+                  "Tv Show",
+                  style: TextStyle(fontSize: 11),
+                )),
+                height: 30,
+              ),
+            ],
           ),
           body: TabBarView(
             children: [

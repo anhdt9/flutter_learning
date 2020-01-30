@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_app_learning/constants.dart';
 import 'package:flutter_app_learning/models/user.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
@@ -16,10 +17,10 @@ class Api {
 
   var _fbLogin = FacebookLogin();
 
-  Future<User> login(String type, {String email, String password}) async {
-    if (type == "facebook") {
+  Future<User> login(LOGIN_TYPE type, {String email, String password}) async {
+    if (type == LOGIN_TYPE.facebook) {
       return _loginFb();
-    } else if (type == "normal") {
+    } else if (type == LOGIN_TYPE.normal) {
       return _loginNormal(email, password);
     }
     return null;
@@ -47,10 +48,10 @@ class Api {
     return xxx;
   }
 
-  logout(String type) async {
-    if (type == "facebook") {
+  logout(LOGIN_TYPE type) async {
+    if (type == LOGIN_TYPE.facebook) {
       await _logoutFb();
-    } else if (type == "normal") {
+    } else if (type == LOGIN_TYPE.normal) {
       await _logoutNormal();
     }
   }

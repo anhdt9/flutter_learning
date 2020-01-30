@@ -9,23 +9,42 @@ class HomePageBody extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: new Scaffold(
-          backgroundColor: Colors.black,
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(
-                icon: new Icon(Icons.movie),
-              ),
-              Tab(
-                icon: new Icon(Icons.tv),
-              ),
-              Tab(
-                icon: new Icon(Icons.favorite),
-              ),
-            ],
-            labelColor: Colors.yellow,
-            unselectedLabelColor: Colors.blue,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: Colors.red,
+          bottomNavigationBar: Container(
+            height: 55,
+            decoration: BoxDecoration(
+              color: Colors.black26,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+            ),
+            child: TabBar(
+              tabs: [
+                Tab(
+                  icon: new Icon(Icons.movie),
+                  child: Text(
+                    "Movie",
+                    style: TextStyle(fontSize: 10),
+                  ),
+                ),
+                Tab(
+                  icon: new Icon(Icons.tv),
+                  child: Text(
+                    "Tv Show",
+                    style: TextStyle(fontSize: 10),
+                  ),
+                ),
+                Tab(
+                  icon: new Icon(Icons.favorite),
+                  child: Text(
+                    "Favorite",
+                    style: TextStyle(fontSize: 10),
+                  ),
+                ),
+              ],
+              labelColor: Colors.blue,
+              unselectedLabelColor: Colors.black,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorColor: Colors.red,
+            ),
           ),
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(),
